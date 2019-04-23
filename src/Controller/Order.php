@@ -32,7 +32,6 @@ final class Order
     public function post(Request $request)
     {
         //todo
-        $orders = FakeDB::getOrders();
         return new JsonResponse();
     }
 }
