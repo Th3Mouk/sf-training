@@ -1,0 +1,19 @@
+orders:
+  path: /orders
+  controller: App\Controller\Order::getAll
+  methods: ['GET']
+
+orders_paid:
+  path: /orders/paid
+  controller: App\Controller\Order::getPaid
+  methods: ['GET']
+
+orders_name:
+  path: /orders/name/{name}
+  controller: App\Controller\Order::getByName
+  methods: ['GET']
+
+order_submit:
+  path: /orders
+  controller: App\Controller\Order::post
+  methods: ['POST']
