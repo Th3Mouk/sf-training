@@ -26,7 +26,11 @@ final class Order
     {
         //todo
         $orders = FakeDB::getOrders();
-        return new JsonResponse();
+        foreach ($orders as $order) {
+            if($order->status()=="paid")
+              $ArrayOrdersPaid[] = $order;
+          }
+        return new JsonResponse($ArrayOrdersPaid);
     }
 
     public function getByName(string $name)
