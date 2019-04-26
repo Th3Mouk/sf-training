@@ -16,10 +16,10 @@ final class Order
         //todo
         $orders = FakeDB::getOrders();
       //  $ArrayOrders = new array();         //je laisse la preuve de mes essais en commentaire
-      //  foreach ($orders as $order) {
-      //    $ArrayOrders[] = new Order($order->uuid(),$order->client_email(),$order->amount(),$order->status());
-      //  }
-        return new JsonResponse($orders);
+        foreach ($orders as $order) {
+          $ArrayOrders[] = $order->toArray();
+        }
+        return new JsonResponse($ArrayOrders);
     }
 
     public function getPaid()
@@ -28,7 +28,7 @@ final class Order
         $orders = FakeDB::getOrders();
         foreach ($orders as $order) {
             if($order->status()=="paid")
-              $ArrayOrdersPaid[] = $order;
+              $ArrayOrdersPaid[] = $order->toArray();
           }
         return new JsonResponse($ArrayOrdersPaid);
     }
