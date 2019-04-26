@@ -6,13 +6,20 @@ use App\FakeDB;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
+//use App\Entity\Order;
+
+
 final class Order
 {
     public function getAll()
     {
         //todo
         $orders = FakeDB::getOrders();
-        return new JsonResponse();
+      //  $ArrayOrders = new array();         //je laisse la preuve de mes essais en commentaire
+      //  foreach ($orders as $order) {
+      //    $ArrayOrders[] = new Order($order->uuid(),$order->client_email(),$order->amount(),$order->status());
+      //  }
+        return new JsonResponse($orders);
     }
 
     public function getPaid()
