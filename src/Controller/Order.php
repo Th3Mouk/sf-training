@@ -58,10 +58,13 @@ final class Order
       $oldorders = LegacyDB::getOrders();
       foreach ($orders as $order) {
         $ArrayOrders[] = $order->toArray();
+        $ArrayUuid[] = $order->uuid();
       }
       foreach ($oldorders as $oldorder) {
-        $ArrayOrders[] = $oldorder->toArray();
+        if(!in_array($oldorder->uuid(), $ArrayUuid))
+          $ArrayOrders[] = $oldorder->toArray();
       }
+
 
 
 
