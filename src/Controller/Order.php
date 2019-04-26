@@ -37,7 +37,11 @@ final class Order
     {
         //todo
         $orders = FakeDB::getOrders();
-        return new JsonResponse();
+        foreach ($orders as $order) {
+          if(strpos($order->client_email(), $name) !== false)
+            $ArrayOrders[] = $order->toArray();
+          }
+        return new JsonResponse($ArrayOrders);
     }
 
     public function post(Request $request)
