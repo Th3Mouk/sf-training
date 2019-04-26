@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\FakeDB;
+use App\LegacyDB;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -47,6 +48,23 @@ final class Order
     public function post(Request $request)
     {
         //todo
-        return new JsonResponse();
+
+        return new JsonResponse();//$request->all);
+    }
+
+    public function getLegacy()
+    {
+      $orders = FakeDB::getOrders();
+      $oldorders = LegacyDB::getOrders();
+      foreach ($orders as $order) {
+        $ArrayOrders[] = $order->toArray();
+      }
+      foreach ($oldorders as $oldorder) {
+        $ArrayOrders[] = $oldorder->toArray();
+      }
+
+
+
+      return new JsonResponse($ArrayOrders);
     }
 }
