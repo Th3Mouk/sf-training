@@ -129,3 +129,5 @@ Use existing code to create the new endpoint, it will guide you.
 Ask for a clue if necessary.
 
 Make the API call on `http://127.0.0.1:8000/orders/legacy` when the server is up, to verify your code.
+
+ouverture a la pull request
