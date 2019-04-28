@@ -22,7 +22,6 @@ final class Order
          $ArrayOrders[] = $order->toArray();      // appel de la fonction toArray pour que JsonResponse les affiches correctement
         }
 
-
       //  $ArrayOrders = array_map(Order::toArray(),$orders);  pour appliquer la méthode toArray a tout le tableau $Orders
 
 
@@ -54,8 +53,13 @@ final class Order
     public function post(Request $request)
     {
         //todo
-
-        return new JsonResponse();//$request->all);
+        $email = $request->get('client_email');
+        if(strpos($order->client_email(), "mordor.com") !== false) //  si mordor.com est autre part qu'a la fin du mail cela marche aussi :(. Mais je n'ai pas trouvé comment faire autrement.
+         {
+           $uuid = uniqid('', true); // j'utilise une fonction de génération aléatoire.La probabilité d'avoir 2 même uuid est faible.
+           return new JsonResponse(['uuid' => $uuid],200); //on retourne un code 200 car la reponse est conforme.
+         }
+         return new JsonResponse(ERREUR,403);// ici il y a  une erreur, on retourne le bon code.
     }
 
     public function getLegacy()
