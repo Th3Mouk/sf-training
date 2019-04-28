@@ -18,11 +18,13 @@ final class Order
         //todo
         $orders = FakeDB::getOrders();
       //  $ArrayOrders = new array();                //je laisse la preuve de mes essais en commentaire
-      //  foreach ($orders as $order) {              // je fait un foreach pour pouvoir récuperer des objets unique et appeller des méthodes sur chacun d'entre eux
-      //    $ArrayOrders[] = $order->toArray();      // appel de la fonction toArray pour que JsonResponse les affiches correctement
-      //  }
-        use App\Entity\Order;
-        $ArrayOrders = array_map(\src\Entity\Order::toArray(),$orders);
+        foreach ($orders as $order) {              // je fait un foreach pour pouvoir récuperer des objets unique et appeller des méthodes sur chacun d'entre eux
+         $ArrayOrders[] = $order->toArray();      // appel de la fonction toArray pour que JsonResponse les affiches correctement
+        }
+
+
+      //  $ArrayOrders = array_map(Order::toArray(),$orders);  pour appliquer la méthode toArray a tout le tableau $Orders
+
 
         return new JsonResponse($ArrayOrders);
     }
