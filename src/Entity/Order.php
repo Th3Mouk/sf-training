@@ -53,13 +53,23 @@ final class Order
       return false;
     }
 
-    public function toArray(): array // static
+    public function toArray(): array
     {
         return [
             'uuid' => $this->uuid(),
             'client_email' => $this->client_email(),
             'amount' => $this->amount(),
             'status' => $this->status(),
+        ];
+    }
+
+    static function toArray2(Order $order): array // static
+    {
+        return [
+            'uuid' => $order->uuid(),
+            'client_email' => $order->client_email(),
+            'amount' => $order->amount(),
+            'status' => $order->status(),
         ];
     }
 }

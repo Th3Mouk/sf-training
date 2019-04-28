@@ -22,10 +22,7 @@ final class Order
       //  foreach ($orders as $order) {              // je fait un foreach pour pouvoir récuperer des objets unique et appeller des méthodes sur chacun d'entre eux
       //   $ArrayOrders[] = $order->toArray();      // appel de la fonction toArray pour que JsonResponse les affiches correctement
       //  }
-        for ($i=0; $i < sizeof($orders)-1; $i++) // effectuée sans forEach
-        {
-          $orders[$i]=$orders[$i]->toArray();  //pour appliquer la méthode toArray a tout le tableau $Orders
-        }
+        $orders = array_map("\APP\Entity\Order::toArray2",$orders);  //pour appliquer la méthode toArray a tout le tableau $Orders
 
         return new JsonResponse($orders);
     }
@@ -50,10 +47,9 @@ final class Order
         //    $ArrayOrders[] = $order->toArray();
         //  }
         $ArrayOrders;
-        for ($i=0; $i < sizeof($orders)-1; $i++) // effectuée sans forEach
+        for ($i=0; $i < sizeof($orders)-1; $i++) // effectuée sans forEach mais avec un for malheuresement
         {
-          if(strpos($orders[$i]->client_email(), $name) !== false)
-            $ArrayOrders[$i]=$orders[$i]->toArray();  //pour appliquer la méthode toArray a tout le tableau $Orders
+            $ArrayOrders[$i+(strpos($orders[$i]->client_email(), $name))]=$orders[$i]->toArray();  //pour appliquer la méthode toArray a tout le tableau $Orders
 
         }
 
