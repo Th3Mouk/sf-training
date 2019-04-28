@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\FakeDB;
 use App\LegacyDB;
+use App\Controller\toArray;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,14 +19,15 @@ final class Order
         //todo
         $orders = FakeDB::getOrders();
       //  $ArrayOrders = new array();                //je laisse la preuve de mes essais en commentaire
-        foreach ($orders as $order) {              // je fait un foreach pour pouvoir récuperer des objets unique et appeller des méthodes sur chacun d'entre eux
-         $ArrayOrders[] = $order->toArray();      // appel de la fonction toArray pour que JsonResponse les affiches correctement
+      //  foreach ($orders as $order) {              // je fait un foreach pour pouvoir récuperer des objets unique et appeller des méthodes sur chacun d'entre eux
+      //   $ArrayOrders[] = $order->toArray();      // appel de la fonction toArray pour que JsonResponse les affiches correctement
+      //  }
+        for ($i=0; $i < sizeof($orders)-1; $i++) // effectuée sans forEach
+        {
+          $orders[$i]=$orders[$i]->toArray();  //pour appliquer la méthode toArray a tout le tableau $Orders
         }
 
-      //  $ArrayOrders = array_map(Order::toArray(),$orders);  pour appliquer la méthode toArray a tout le tableau $Orders
-
-
-        return new JsonResponse($ArrayOrders);
+        return new JsonResponse($orders);
     }
 
     public function getPaid()
@@ -43,10 +45,20 @@ final class Order
     {
         //todo
         $orders = FakeDB::getOrders();
-        foreach ($orders as $order) {
-          if(strpos($order->client_email(), $name) !== false) // comparaison pour savoir si l'adresse mail contient le nom envoyé en paramètre.
-            $ArrayOrders[] = $order->toArray();
-          }
+        //foreach ($orders as $order) {
+        //  if(strpos($order->client_email(), $name) !== false) // comparaison pour savoir si l'adresse mail contient le nom envoyé en paramètre.
+        //    $ArrayOrders[] = $order->toArray();
+        //  }
+        $ArrayOrders;
+        for ($i=0; $i < sizeof($orders)-1; $i++) // effectuée sans forEach
+        {
+          if(strpos($orders[$i]->client_email(), $name) !== false)
+            $ArrayOrders[$i]=$orders[$i]->toArray();  //pour appliquer la méthode toArray a tout le tableau $Orders
+
+        }
+
+      //  $ArrayOrders = preg_grep ( '"/'.$name.'@'.'/"' , $orders );
+
         return new JsonResponse($ArrayOrders);
     }
 

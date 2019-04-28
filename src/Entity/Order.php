@@ -53,7 +53,7 @@ final class Order
       return false;
     }
 
-    public function toArray(): array // static 
+    public function toArray(): array // static
     {
         return [
             'uuid' => $this->uuid(),
