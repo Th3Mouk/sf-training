@@ -14,7 +14,12 @@ use Symfony\Component\HttpFoundation\Request;
 
 final class Order
 {
-    public function getAll()
+
+
+
+
+
+    public function getAll() // FAIT SANS FOR / FOREACH !!!
     {
         //todo
         $orders = FakeDB::getOrders();
@@ -46,16 +51,11 @@ final class Order
         //  if(strpos($order->client_email(), $name) !== false) // comparaison pour savoir si l'adresse mail contient le nom envoyé en paramètre.
         //    $ArrayOrders[] = $order->toArray();
         //  }
-        $ArrayOrders;
-        for ($i=0; $i < sizeof($orders)-1; $i++) // effectuée sans forEach mais avec un for malheuresement
-        {
-            $ArrayOrders[$i+(strpos($orders[$i]->client_email(), $name))]=$orders[$i]->toArray();  //pour appliquer la méthode toArray a tout le tableau $Orders
-
-        }
-
+        $ArrayName = array_fill(0, sizeof($orders) , $name );
+        $orders = array_map("\APP\Entity\Order::contain",$ArrayName,$orders);
       //  $ArrayOrders = preg_grep ( '"/'.$name.'@'.'/"' , $orders );
 
-        return new JsonResponse($ArrayOrders);
+        return new JsonResponse($orders);
     }
 
     public function post(Request $request)

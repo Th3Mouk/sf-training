@@ -65,11 +65,19 @@ final class Order
 
     static function toArray2(Order $order): array // static
     {
-        return [
-            'uuid' => $order->uuid(),
-            'client_email' => $order->client_email(),
-            'amount' => $order->amount(),
-            'status' => $order->status(),
-        ];
+      return [
+          'uuid' => $order->uuid(),
+          'client_email' => $order->client_email(),
+          'amount' => $order->amount(),
+          'status' => $order->status(),
+      ];
     }
+
+    static function contain($value, Order $order)
+    {
+      if(strpos($order->client_email(), $value) !== false)
+        return Order::toArray2($order);
+    }
+
+
 }
