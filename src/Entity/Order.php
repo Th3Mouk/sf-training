@@ -46,7 +46,14 @@ final class Order
         return $this->status;
     }
 
-    public function toArray(): array
+    public function isPaid()
+    {
+      if($this->status=="paid")
+        return true;
+      return false;
+    }
+
+    public function toArray(): array // static 
     {
         return [
             'uuid' => $this->uuid(),

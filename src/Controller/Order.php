@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\FakeDB;
 use App\LegacyDB;
+
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -16,10 +17,13 @@ final class Order
     {
         //todo
         $orders = FakeDB::getOrders();
-      //  $ArrayOrders = new array();         //je laisse la preuve de mes essais en commentaire
-        foreach ($orders as $order) {   // je fait un foreach pour pouvoir récuperer des objets unique et appeller des méthodes sur chacun d'entre eux
-          $ArrayOrders[] = $order->toArray(); // appel de la fonction toArray pour que JsonResponse les affiches correctement
-        }
+      //  $ArrayOrders = new array();                //je laisse la preuve de mes essais en commentaire
+      //  foreach ($orders as $order) {              // je fait un foreach pour pouvoir récuperer des objets unique et appeller des méthodes sur chacun d'entre eux
+      //    $ArrayOrders[] = $order->toArray();      // appel de la fonction toArray pour que JsonResponse les affiches correctement
+      //  }
+        use App\Entity\Order;
+        $ArrayOrders = array_map(\src\Entity\Order::toArray(),$orders);
+
         return new JsonResponse($ArrayOrders);
     }
 
@@ -28,7 +32,7 @@ final class Order
         //todo
         $orders = FakeDB::getOrders();
         foreach ($orders as $order) {
-            if($order->status()=="paid") // je compare leurs états. si ils sont "paid" je les ajoutes
+            if($order->isPaid()) // je compare leurs états. si ils sont "paid" je les ajoutes
               $ArrayOrdersPaid[] = $order->toArray();
           }
         return new JsonResponse($ArrayOrdersPaid);
