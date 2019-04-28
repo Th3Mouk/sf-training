@@ -46,6 +46,13 @@ final class Order
         return $this->status;
     }
 
+    public function isPaid()
+    {
+      if($this->status=="paid")
+        return true;
+      return false;
+    }
+
     public function toArray(): array
     {
         return [
@@ -55,4 +62,22 @@ final class Order
             'status' => $this->status(),
         ];
     }
+
+    static function toArray2(Order $order): array // static
+    {
+      return [
+          'uuid' => $order->uuid(),
+          'client_email' => $order->client_email(),
+          'amount' => $order->amount(),
+          'status' => $order->status(),
+      ];
+    }
+
+    static function contain($value, Order $order)
+    {
+      if(strpos($order->client_email(), $value) !== false)
+        return Order::toArray2($order);
+    }
+
+
 }

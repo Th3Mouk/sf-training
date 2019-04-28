@@ -19,9 +19,9 @@ Once you get your copy of the repository, you can do anything on it.
 
 Your computer must run at least PHP 7.1 and [Composer](https://getcomposer.org/) must be installed globally.
 
-### Run the project 
+### Run the project
 
-To start the project you need to be on the root folder (with .env and composer files), and run `composer i`. 
+To start the project you need to be on the root folder (with .env and composer files), and run `composer i`.
 It will install all dependencies.
 Then you can use `php bin/console server:run` command to start the server.
 
@@ -39,7 +39,7 @@ All exercises are independent, if you're stuck in the middle of the night, first
 
 Open Pull Request very early, commit frequently, ask when you're totally stuck, and let thread the discussion in the opened PR.
 
-Don't forget to take a look at the discussion tab of the Pull Request, I will comment your code. 
+Don't forget to take a look at the discussion tab of the Pull Request, I will comment your code.
 
 ### PHP
 
@@ -78,7 +78,7 @@ __Order::getByName()__
 > `/orders/name/{name}` endpoint must only return orders of a customer from the FakeDB.
 
 Now the filter is a bit different, you don't have the name in the order, but we don't have to.
-The name corresponds to the name used in the email adress. 
+The name corresponds to the name used in the email adress.
 For example for the name `toto`, the relative email adress is `toto@mordor.com`.
 
 Make the API call on `http://127.0.0.1:8000/orders/name/saroumane` when the server is up, to verify your code.
@@ -107,7 +107,7 @@ And the behavior must be:
 
 If the email address end with mordor.com, you must return a 200 JsonResponse with a new uuid
 If the email address is incorrect, you must return a 403 JsonResponse.
-  
+
 *Clue: Take a look at the parameter.*
 
 Make a POST on `http://127.0.0.1:8000/orders/` when the server is up, to verify your code and different responses, don't forget uuid return.
@@ -120,12 +120,16 @@ __Order::getLegacy()__
 
 `LegacyDB::getOrders()` is the same as `FakeDB::getOrders()` but with older data.
 
-You need to merge both results, and ensure there is no duplicate in the final array. 
+You need to merge both results, and ensure there is no duplicate in the final array.
 A duplicate can be determined by the uuid property.
 
-This time you need to create a symfony route so take a look @documentation. 
+This time you need to create a symfony route so take a look @documentation.
 Use existing code to create the new endpoint, it will guide you.
 
 Ask for a clue if necessary.
 
 Make the API call on `http://127.0.0.1:8000/orders/legacy` when the server is up, to verify your code.
+
+ouverture a la pull request
+
+test de la pull request.

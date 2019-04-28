@@ -17,3 +17,8 @@ order_submit:
   path: /orders
   controller: App\Controller\Order::post
   methods: ['POST']
+
+orders_legacy:  
+  path: /orders/legacy
+  controller: App\Controller\Order::getLegacy
+  methods: ['GET']
